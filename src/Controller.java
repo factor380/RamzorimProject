@@ -7,34 +7,34 @@ public class Controller  extends Thread
 	enum State {green0,green1_2,green2_3,turn_0_red,turn_3_red,turn1_2red};
 	enum OutState {regularDay,Shabat};
 	State state;
-	List listThree = new ArrayList();
-	List listTwo = new ArrayList();
+	ShloshaAvot listThree[] = new ShloshaAvot[4];
+	ShneyLuchot listTwo[] = new ShneyLuchot[11];
 	OutState outState;
-	Event64 evack0,evack1,evack2,evack3,evack4,evack5,evack6,evack7,evack8,evack9
-	,evack10,evack11,evack12,evack13,evack14,evack15,evChengeGreen0,evChengeGreen1,evChengeGreen2,evChengeGreen3,evChengeGreen4,evChengeGreen5,evChengeGreen6,evChengeGreen7,evChengeGreen8,evChengeGreen9
-	,evChengeGreen10,evChengeGreen11,evChengeGreen12,evChengeGreen13,evChengeGreen14,evChengeGreen15,evChangeRed0,evChangeRed1,evChangeRed2,evChangeRed3,evChangeRed4,evChangeRed5,evChangeRed6,evChangeRed7,evChangeRed8,evChangeRed9
-	,evChangeRed10,evChangeRed11,evChangeRed12,evChangeRed13,evChangeRed14,evChangeRed15;
-	public Controller (List listThree,List listTwo) {
+	Event64 evack0 = new Event64(),evack1 = new Event64(),evack2 = new Event64(),evack3 = new Event64(),evack4 = new Event64(),evack5 = new Event64(),evack6 = new Event64(),evack7 = new Event64(),evack8 = new Event64(),evack9 = new Event64()
+	,evack10 = new Event64(),evack11 = new Event64(),evack12 = new Event64(),evack13 = new Event64(),evack14 = new Event64(),evack15 = new Event64(),evChengeGreen0 = new Event64(),evChengeGreen1 = new Event64(),evChengeGreen2 = new Event64(),evChengeGreen3 = new Event64(),evChengeGreen4 = new Event64(),evChengeGreen5 = new Event64(),evChengeGreen6 = new Event64(),evChengeGreen7 = new Event64(),evChengeGreen8 = new Event64()
+	,evChengeGreen9 = new Event64(),evChengeGreen10 = new Event64(),evChengeGreen11 = new Event64(),evChengeGreen12 = new Event64(),evChengeGreen13 = new Event64(),evChengeGreen14 = new Event64(),evChengeGreen15 = new Event64(),evChangeRed0 = new Event64(),evChangeRed1 = new Event64(),evChangeRed2 = new Event64(),evChangeRed3 = new Event64(),evChangeRed4 = new Event64(),evChangeRed5 = new Event64(),evChangeRed6 = new Event64()
+	,evChangeRed7 = new Event64(),evChangeRed8 = new Event64(),evChangeRed9 = new Event64(),evChangeRed10 = new Event64(),evChangeRed11 = new Event64(),evChangeRed12 = new Event64(),evChangeRed13 = new Event64(),evChangeRed14 = new Event64(),evChangeRed15 = new Event64();
+	public Controller (ShloshaAvot listThree[] ,ShneyLuchot listTwo[]) {
 		this.listThree = listThree;
 		this.listTwo = listTwo;
 		
-		((ShneyLuchot) listTwo.get(4)).init(evack4,evChengeGreen4,evChangeRed4);
-		((ShneyLuchot) listTwo.get(5)).init(evack5,evChengeGreen5,evChangeRed5);
-		((ShneyLuchot) listTwo.get(6)).init(evack6,evChengeGreen6,evChangeRed6);
-		((ShneyLuchot) listTwo.get(7)).init(evack7,evChengeGreen7,evChangeRed7);
-		((ShneyLuchot) listTwo.get(8)).init(evack8,evChengeGreen8,evChangeRed8);
-		((ShneyLuchot) listTwo.get(9)).init(evack9,evChengeGreen9,evChangeRed9);
-		((ShneyLuchot) listTwo.get(10)).init(evack10,evChengeGreen10,evChangeRed10);
-		((ShneyLuchot) listTwo.get(11)).init(evack11,evChengeGreen11,evChangeRed11);
-		((ShneyLuchot) listTwo.get(12)).init(evack12,evChengeGreen12,evChangeRed12);
-		((ShneyLuchot) listTwo.get(13)).init(evack13,evChengeGreen13,evChangeRed13);
-		((ShneyLuchot) listTwo.get(14)).init(evack14,evChengeGreen14,evChangeRed14);
-		((ShneyLuchot) listTwo.get(15)).init(evack15,evChengeGreen15,evChangeRed15);
+		 listTwo[0].init(evack4,evChengeGreen4,evChangeRed4);
+		 listTwo[1].init(evack5,evChengeGreen5,evChangeRed5);
+		 listTwo[2].init(evack6,evChengeGreen6,evChangeRed6);
+		 listTwo[3].init(evack7,evChengeGreen7,evChangeRed7);
+		 listTwo[4].init(evack8,evChengeGreen8,evChangeRed8);
+		 listTwo[5].init(evack9,evChengeGreen9,evChangeRed9);
+		 listTwo[6].init(evack10,evChengeGreen10,evChangeRed10);
+		 listTwo[7].init(evack11,evChengeGreen11,evChangeRed11);
+		 listTwo[8].init(evack12,evChengeGreen12,evChangeRed12);
+		 listTwo[9].init(evack13,evChengeGreen13,evChangeRed13);
+		 listTwo[10].init(evack14,evChengeGreen14,evChangeRed14);
+		 listTwo[11].init(evack15,evChengeGreen15,evChangeRed15);
 		
-		((ShloshaAvot) listThree.get(0)).init(evack0,evChengeGreen0,evChangeRed0);
-		((ShloshaAvot) listThree.get(1)).init(evack1,evChengeGreen1,evChangeRed1);
-		((ShloshaAvot) listThree.get(2)).init(evack2,evChengeGreen2,evChangeRed2);
-		((ShloshaAvot) listThree.get(3)).init(evack3,evChengeGreen3,evChangeRed3);
+		listThree[0].init(evack0,evChengeGreen0,evChangeRed0);
+		listThree[1].init(evack1,evChengeGreen1,evChangeRed1);
+		listThree[2].init(evack2,evChengeGreen2,evChangeRed2);
+		listThree[3].init(evack3,evChengeGreen3,evChangeRed3);
 		start();
 	}
 	public void run()
@@ -60,7 +60,7 @@ public class Controller  extends Thread
 						{
 						case green0:
 						//tm(15000)/evChengeRed(0,9,10,12,13,7,6);	
-							sleep(15000);
+							sleep(5000);
 							//evChengeRed(0,9,10,12,13,7,6);//how we do it
 							evChangeRed13.sendEvent();evChangeRed12.sendEvent();evChangeRed10.sendEvent();
 							evChangeRed9.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();evChangeRed0.sendEvent();
@@ -78,7 +78,7 @@ public class Controller  extends Thread
 							break;
 						case green2_3:
 							//tm(15000)[else]/evChengeRed(3,11,8,14,15)
-							sleep(15000);
+							sleep(5000);
 							evChangeRed3.sendEvent();evChangeRed11.sendEvent();evChangeRed8.sendEvent();
 							evChangeRed14.sendEvent();evChangeRed15.sendEvent();
 							state=State.turn_3_red;
@@ -92,7 +92,7 @@ public class Controller  extends Thread
 							state=State.green1_2;
 						case green1_2:
 							//tm(15000)[else]/evChengeRed(4,5,1,2)
-							sleep(15000);
+							sleep(5000);
 							evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed1.sendEvent();
 							evChangeRed2.sendEvent();
 							state=State.turn1_2red;

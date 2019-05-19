@@ -10,7 +10,7 @@ class ShneyLuchot extends Thread
 	JPanel panel;
 	State state;
 	OutState outState;
-	Event64 evack,evChengeGreen,evChengeRed;
+	Event64 evack = new Event64(),evChengeGreen = new Event64(),evChengeRed = new Event64();
 	public ShneyLuchot( Ramzor ramzor,JPanel panel)
 	{
 		this.ramzor=ramzor;
@@ -39,7 +39,7 @@ class ShneyLuchot extends Thread
 						switch(state)
 						{
 						case red:
-							//evchengeRed/setLigt(green)
+							//evchengeGreen/setLigt(green)
 							evChengeGreen.waitEvent();
 							sleep(1000);
 							setLight(1,Color.GRAY);
@@ -47,7 +47,7 @@ class ShneyLuchot extends Thread
 							state=State.green;
 							break;
 						case green:
-							//evchengeGreen/setLight(red),evack
+							//evchengeRed/setLight(red),evack
 							evChengeRed.waitEvent();
 							setLight(1,Color.RED);
 							setLight(2,Color.GRAY);

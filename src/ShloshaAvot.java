@@ -51,6 +51,7 @@ public class ShloshaAvot extends Thread
 								setLight(2,Color.LIGHT_GRAY);
 								setLight(3,Color.GREEN);
 								state=State.green;
+								break;
 							case yellow:
 								//tm(500)/setLight(red),evack
 								sleep(500);
@@ -58,7 +59,7 @@ public class ShloshaAvot extends Thread
 								setLight(2,Color.LIGHT_GRAY);
 								setLight(3,Color.LIGHT_GRAY);
 								evack.sendEvent();
-								state=State.yellow;
+								state=State.red;
 								break;
 							case green:
 								//evChengeRed /setLight(yellow)
@@ -66,7 +67,7 @@ public class ShloshaAvot extends Thread
 								setLight(1,Color.LIGHT_GRAY);
 								setLight(2,Color.YELLOW);
 								setLight(3,Color.LIGHT_GRAY);
-								state=State.red;
+								state=State.yellow;
 								break;
 							
 							}
