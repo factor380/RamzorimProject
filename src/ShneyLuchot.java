@@ -2,15 +2,6 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import ShloshaAvot.OutState;
-import ShloshaAvot.State;
-
-/*
- * Created on Mimuna 5767  upDate on Tevet 5770 
- */
-
-
-
 class ShneyLuchot extends Thread
 {
 	enum State {red,green};
@@ -19,17 +10,24 @@ class ShneyLuchot extends Thread
 	JPanel panel;
 	State state;
 	OutState outState;
+	Event64 evack,evChengeGreen,evChengeRed;
 	public ShneyLuchot( Ramzor ramzor,JPanel panel)
 	{
 		this.ramzor=ramzor;
 		this.panel=panel;
+	}
+	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed) {
+		this.evack = evack;
+		this.evChengeGreen = evChengeGreen;
+		this.evChengeRed = evChengeRed;
 		start();
 	}
-	
 	public void run()
 	{
 		state=State.red;
 		outState=OutState.regularDay;
+		setLight(1,Color.RED);
+		evack.sendEvent();
 		try 
 		{
 			while (true)

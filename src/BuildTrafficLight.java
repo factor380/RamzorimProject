@@ -34,7 +34,7 @@ public class BuildTrafficLight
 
 		ramzorim[16]=new Ramzor(1,30,555,645);
 
-		TrafficLightFrame tlf=new TrafficLightFrame(" תשע''ב installation of traffic lights",ramzorim);
+		TrafficLightFrame tlf=new TrafficLightFrame("  installation of traffic lights",ramzorim);
 
 		new ShloshaAvot(ramzorim[0],tlf.myPanel,1);
 		new ShloshaAvot(ramzorim[1],tlf.myPanel,2);

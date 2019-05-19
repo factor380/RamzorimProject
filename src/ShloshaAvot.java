@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import javax.swing.JPanel;
 
 
@@ -12,19 +11,27 @@ public class ShloshaAvot extends Thread
 	JPanel panel;
 	State state;
 	OutState outState;
+	Event64 evack,evChengeGreen,evChengeRed;
+	
 	private boolean stop=true;
 	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key)
 	{
 		this.ramzor=ramzor;
 		this.panel=panel;
-//		new CarsMaker(panel,this,key);
+		//new CarsMaker(panel,this,key);
+	}
+	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed) {
+		this.evack = evack;
+		this.evChengeGreen = evChengeGreen;
+		this.evChengeRed = evChengeRed;
 		start();
 	}
-
 	public void run()
 	{
 		state=State.red;
 		outState=OutState.regularDay;
+		setLight(1,Color.RED);
+		evack.sendEvent();
 		try 
 		{
 			
