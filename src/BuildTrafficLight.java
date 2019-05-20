@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JRadioButton;
 
 /*
@@ -12,7 +9,7 @@ import javax.swing.JRadioButton;
  */
 public class BuildTrafficLight
 {
-
+	
 	public static void main(String[] args) 
 	{
 		final int numOfLights=4+12+1;
@@ -23,8 +20,8 @@ public class BuildTrafficLight
 		ramzorim[0]=new Ramzor(3,40,430,110,472,110,514,110);
 		ramzorim[1]=new Ramzor(3,40,450,310,450,352,450,394);
 		ramzorim[2]=new Ramzor(3,40,310,630,280,605,250,580);
-		ramzorim[3]=new Ramzor(3,40,350,350,308,350,266,350);
-
+		ramzorim[3]=new Ramzor(3,40,350,350,308,350,266,350); 
+	
 		ramzorim[4]=new Ramzor(2,20,600,18,600,40);
 		ramzorim[5]=new Ramzor(2,20,600,227,600,205);
 		ramzorim[6]=new Ramzor(2,20,600,255,600,277);
@@ -42,18 +39,10 @@ public class BuildTrafficLight
 
 		TrafficLightFrame tlf=new TrafficLightFrame("  installation of traffic lights",ramzorim);
 
-		//new ShloshaAvot(ramzorim[0],tlf.myPanel,1);
-		//new ShloshaAvot(ramzorim[1],tlf.myPanel,2);
-		//new ShloshaAvot(ramzorim[2],tlf.myPanel,3);
-		//new ShloshaAvot(ramzorim[3],tlf.myPanel,4);
 		for (int i = 0; i<4 ; i++) {
 			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i);
 		}
 
-		//new ShneyLuchot(ramzorim[4],tlf.myPanel);
-		//new ShneyLuchot(ramzorim[5],tlf.myPanel);
-		//new ShneyLuchot(ramzorim[9],tlf.myPanel);
-		//new ShneyLuchot(ramzorim[10],tlf.myPanel);
 		for (int i = 0; i<12 ; i++) {
 			listTwo[i] = new ShneyLuchot(ramzorim[i+4],tlf.myPanel);
 		}
@@ -92,6 +81,6 @@ public class BuildTrafficLight
 		butt[12].setOpaque(false);
 		butt[12].addActionListener(myListener);
 		tlf.myPanel.add(butt[12]);
-		controller = new Controller(listThree,listTwo);
+		controller = new Controller(listThree,listTwo,myListener);
 	}
 }
