@@ -11,7 +11,7 @@ public class ShloshaAvot extends Thread
 	JPanel panel;
 	State state;
 	OutState outState;
-	Event64 evack,evChengeGreen,evChengeRed;
+	Event64 evack,evChengeGreen,evChengeRed,evShabat,stopEvShabat;
 	
 	private boolean stop=true;
 	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key)
@@ -20,10 +20,12 @@ public class ShloshaAvot extends Thread
 		this.panel=panel;
 		//new CarsMaker(panel,this,key);
 	}
-	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed) {
+	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed,Event64 evShabat,Event64 stopEvShabat) {
 		this.evack = evack;
 		this.evChengeGreen = evChengeGreen;
 		this.evChengeRed = evChengeRed;
+		this.evShabat = evShabat;
+		this.stopEvShabat = stopEvShabat;
 		start();
 	}
 	public void run()
@@ -32,9 +34,12 @@ public class ShloshaAvot extends Thread
 		outState=OutState.regularDay;
 		setLight(1,Color.RED);
 		evack.sendEvent();
+		if(evShabat.arrivedEvent()) {
+			evShabat.waitEvent();
+			outState = OutState.Shabat;
+		}
 		try 
 		{
-			
 				while (true)
 				{
 					switch (outState)
@@ -46,7 +51,7 @@ public class ShloshaAvot extends Thread
 							case red:
 								//evChengeGreen/ sleep(1000),setLight(green)
 								evChengeGreen.waitEvent();
-								sleep(1000);
+								sleep(3000);
 								setLight(1,Color.LIGHT_GRAY);
 								setLight(2,Color.LIGHT_GRAY);
 								setLight(3,Color.GREEN);
@@ -73,7 +78,15 @@ public class ShloshaAvot extends Thread
 							}
 						}
 					case Shabat:
-						
+						sleep(300);
+						setLight(2,Color.YELLOW);
+						sleep(300);
+						setLight(2,Color.LIGHT_GRAY);
+						if(stopEvShabat.arrivedEvent())
+						outState=OutState.regularDay;
+						else
+							outState = OutState.Shabat;
+						break;
 				}
 //				sleep(1000);
 //				setLight(2,Color.YELLOW);
@@ -93,7 +106,6 @@ public class ShloshaAvot extends Thread
 //				setLight(3,Color.LIGHT_GRAY);
 			}
 		} catch (InterruptedException e) {}
-
 	}
 	public void setLight(int place, Color color)
 	{

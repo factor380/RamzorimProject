@@ -54,7 +54,6 @@ class ShneyLuchot extends Thread
 							evack.sendEvent();
 							state=State.red;
 							break;
-						
 						}
 					}
 				case off:
