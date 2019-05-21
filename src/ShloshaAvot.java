@@ -51,7 +51,7 @@ public class ShloshaAvot extends Thread
 							case red:
 								//evChengeGreen/ sleep(1000),setLight(green)
 								evChengeGreen.waitEvent();
-								sleep(3000);
+								sleep(1000);
 								setLight(1,Color.LIGHT_GRAY);
 								setLight(2,Color.LIGHT_GRAY);
 								setLight(3,Color.GREEN);

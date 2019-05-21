@@ -220,7 +220,14 @@ public class Controller  extends Thread
 						}
 					}
 				case Shabat:
-					
+					evChangeRed0.sendEvent();evChangeRed1.sendEvent();evChangeRed2.sendEvent();evChangeRed3.sendEvent();
+					evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();
+					evChangeRed8.sendEvent();evChangeRed9.sendEvent();evChangeRed10.sendEvent();evChangeRed11.sendEvent();
+					evChangeRed12.sendEvent();evChangeRed13.sendEvent();evChangeRed14.sendEvent();evChangeRed15.sendEvent();
+					evack0.waitEvent();evack1.waitEvent();evack2.waitEvent();evack3.waitEvent();
+					evack4.waitEvent();evack5.waitEvent();evack6.waitEvent();evack7.waitEvent();
+					evack8.waitEvent();evack9.waitEvent();evack10.waitEvent();evack11.waitEvent();
+                    evack12.waitEvent();evack13.waitEvent();evack14.waitEvent();evack15.waitEvent();
 					stopEvShabat.waitEvent();
 					out=false;
 					outState=OutState.regularDay;
