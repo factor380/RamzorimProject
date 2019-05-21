@@ -1,7 +1,3 @@
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JRadioButton;
 
 public class Controller  extends Thread
@@ -66,6 +62,9 @@ public class Controller  extends Thread
 						switch(state)
 						{
 						case green0:
+							if(buttonRegel11_8_15_14.arrivedEvent()) {
+								data = buttonRegel11_8_15_14.waitEvent();
+							}
 							if(data != null)
 							    ((JRadioButton) data).setSelected(false);
 							if(evShabat.arrivedEvent()) {
@@ -104,6 +103,9 @@ public class Controller  extends Thread
 							}
 							break;
 						case green2_3:
+							if(buttonRegel11_8_15_14.arrivedEvent()) {
+								data = buttonRegel11_8_15_14.waitEvent();
+							}
 							if(data != null)
 							    ((JRadioButton) data).setSelected(false);
 							if(evShabat.arrivedEvent()) {
@@ -169,6 +171,10 @@ public class Controller  extends Thread
 							}
 							break;
 						case turn1_2red:
+							if(buttonRegel9_10.arrivedEvent()) {
+								data = buttonRegel9_10.waitEvent();
+								((JRadioButton) data).setSelected(false);
+							}
 							if(stamButtonRegel.arrivedEvent()) {
 								data2 = stamButtonRegel.waitEvent();
 							((JRadioButton) data2).setSelected(false);
