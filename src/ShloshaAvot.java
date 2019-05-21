@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 
 
 
+
 public class ShloshaAvot extends Thread
 {
 	enum State {red,green,yellow};
@@ -32,6 +33,7 @@ public class ShloshaAvot extends Thread
 	{
 		state=State.red;
 		outState=OutState.regularDay;
+		boolean finishR=true;
 		setLight(1,Color.RED);
 		evack.sendEvent();
 		if(evShabat.arrivedEvent()) {
@@ -45,17 +47,35 @@ public class ShloshaAvot extends Thread
 					switch (outState)
 					{
 						case regularDay:
-						while(true) {
+						while(finishR) {
 							switch(state)
 							{
 							case red:
 								//evChengeGreen/ sleep(1000),setLight(green)
+								if(evChengeGreen.arrivedEvent())
+								{
 								evChengeGreen.waitEvent();
 								sleep(1000);
 								setLight(1,Color.LIGHT_GRAY);
 								setLight(2,Color.LIGHT_GRAY);
 								setLight(3,Color.GREEN);
 								state=State.green;
+								}
+								else if(evChengeRed.arrivedEvent())
+								{
+									evChengeRed.waitEvent();
+									evack.sendEvent();
+									state=State.red;
+								}
+								else if(evShabat.arrivedEvent())
+								{
+									evShabat.waitEvent();
+									setLight(1,Color.GRAY);
+									setLight(2,Color.GRAY);
+									finishR=false;
+								}
+								else
+									yield(); 
 								break;
 							case yellow:
 								//tm(500)/setLight(red),evack
@@ -88,22 +108,7 @@ public class ShloshaAvot extends Thread
 							outState = OutState.Shabat;
 						break;
 				}
-//				sleep(1000);
-//				setLight(2,Color.YELLOW);
-//				sleep(1000);
-//				setLight(1,Color.LIGHT_GRAY);
-//				setLight(2,Color.LIGHT_GRAY);
-//				setLight(3,Color.GREEN);
-//				stop=false;
-//				sleep(3000);
-//				stop=true;
-//				setLight(1,Color.LIGHT_GRAY);
-//				setLight(2,Color.YELLOW);
-//				setLight(3,Color.LIGHT_GRAY);
-//				sleep(1000);
-//				setLight(1,Color.RED);
-//				setLight(2,Color.LIGHT_GRAY);
-//				setLight(3,Color.LIGHT_GRAY);
+
 			}
 		} catch (InterruptedException e) {}
 	}
