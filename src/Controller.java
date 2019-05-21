@@ -10,34 +10,38 @@ public class Controller  extends Thread
 	ShneyLuchot listTwo[] = new ShneyLuchot[11]; 
 	OutState outState;
 	Object data,data2;
-	Event64 buttonRegel9_10 = new Event64(),buttonRegel11_8_15_14 = new Event64(),stamButtonRegel = new Event64(),evShabat = new Event64(),stopEvShabat = new Event64();
+	Event64 buttonRegel9_10 = new Event64(),buttonRegel11_8_15_14 = new Event64(),stamButtonRegel = new Event64(),evButtonShabat = new Event64(),stopButtonEvShabat = new Event64();
 	Event64 evack0 = new Event64(),evack1 = new Event64(),evack2 = new Event64(),evack3 = new Event64(),evack4 = new Event64(),evack5 = new Event64(),evack6 = new Event64(),evack7 = new Event64(),evack8 = new Event64(),evack9 = new Event64()
 	,evack10 = new Event64(),evack11 = new Event64(),evack12 = new Event64(),evack13 = new Event64(),evack14 = new Event64(),evack15 = new Event64(),evChengeGreen0 = new Event64(),evChengeGreen1 = new Event64(),evChengeGreen2 = new Event64(),evChengeGreen3 = new Event64(),evChengeGreen4 = new Event64(),evChengeGreen5 = new Event64(),evChengeGreen6 = new Event64(),evChengeGreen7 = new Event64(),evChengeGreen8 = new Event64()
 	,evChengeGreen9 = new Event64(),evChengeGreen10 = new Event64(),evChengeGreen11 = new Event64(),evChengeGreen12 = new Event64(),evChengeGreen13 = new Event64(),evChengeGreen14 = new Event64(),evChengeGreen15 = new Event64(),evChangeRed0 = new Event64(),evChangeRed1 = new Event64(),evChangeRed2 = new Event64(),evChangeRed3 = new Event64(),evChangeRed4 = new Event64(),evChangeRed5 = new Event64(),evChangeRed6 = new Event64()
-	,evChangeRed7 = new Event64(),evChangeRed8 = new Event64(),evChangeRed9 = new Event64(),evChangeRed10 = new Event64(),evChangeRed11 = new Event64(),evChangeRed12 = new Event64(),evChangeRed13 = new Event64(),evChangeRed14 = new Event64(),evChangeRed15 = new Event64();
+	,evChangeRed7 = new Event64(),evChangeRed8 = new Event64(),evChangeRed9 = new Event64(),evChangeRed10 = new Event64(),evChangeRed11 = new Event64(),evChangeRed12 = new Event64(),evChangeRed13 = new Event64(),evChangeRed14 = new Event64(),evChangeRed15 = new Event64()
+	,evShabat0 = new Event64(),evShabat1 = new Event64(),evShabat2 = new Event64(),evShabat3 = new Event64(),evShabat4 = new Event64(),evShabat5 = new Event64(),evShabat6 = new Event64(),evShabat7 = new Event64(),evShabat8 = new Event64()
+	,evShabat9 = new Event64(),evShabat10 = new Event64(),evShabat11 = new Event64(),evShabat12 = new Event64(),evShabat13 = new Event64(),evShabat14 = new Event64(),evShabat15 = new Event64()
+			,stopEvShabat0 = new Event64(),stopEvShabat1 = new Event64(),stopEvShabat2 = new Event64(),stopEvShabat3 = new Event64(),stopEvShabat4 = new Event64(),stopEvShabat5 = new Event64(),stopEvShabat6 = new Event64(),stopEvShabat7 = new Event64(),stopEvShabat8 = new Event64()
+			,stopEvShabat9 = new Event64(),stopEvShabat10 = new Event64(),stopEvShabat11 = new Event64(),stopEvShabat12 = new Event64(),stopEvShabat13 = new Event64(),stopEvShabat14 = new Event64(),stopEvShabat15 = new Event64();
 	public Controller (ShloshaAvot listThree[] ,ShneyLuchot listTwo[],MyActionListener myListener) {
 		this.listThree = listThree;
 		this.listTwo = listTwo;
 		
-		myListener.init(buttonRegel9_10, buttonRegel11_8_15_14,stamButtonRegel,evShabat,stopEvShabat);
+		myListener.init(buttonRegel9_10, buttonRegel11_8_15_14,stamButtonRegel,evButtonShabat,stopButtonEvShabat);
 		
-		 listTwo[0].init(evack4,evChengeGreen4,evChangeRed4);
-		 listTwo[1].init(evack5,evChengeGreen5,evChangeRed5);
-		 listTwo[2].init(evack6,evChengeGreen6,evChangeRed6);
-		 listTwo[3].init(evack7,evChengeGreen7,evChangeRed7);
-		 listTwo[4].init(evack8,evChengeGreen8,evChangeRed8);
-		 listTwo[5].init(evack9,evChengeGreen9,evChangeRed9);
-		 listTwo[6].init(evack10,evChengeGreen10,evChangeRed10);
-		 listTwo[7].init(evack11,evChengeGreen11,evChangeRed11);
-		 listTwo[8].init(evack12,evChengeGreen12,evChangeRed12);
-		 listTwo[9].init(evack13,evChengeGreen13,evChangeRed13);
-		 listTwo[10].init(evack14,evChengeGreen14,evChangeRed14);
-		 listTwo[11].init(evack15,evChengeGreen15,evChangeRed15);
+		 listTwo[0].init(evack4,evChengeGreen4,evChangeRed4,evShabat4,stopEvShabat4);
+		 listTwo[1].init(evack5,evChengeGreen5,evChangeRed5,evShabat5,stopEvShabat5);
+		 listTwo[2].init(evack6,evChengeGreen6,evChangeRed6,evShabat6,stopEvShabat6);
+		 listTwo[3].init(evack7,evChengeGreen7,evChangeRed7,evShabat7,stopEvShabat7);
+		 listTwo[4].init(evack8,evChengeGreen8,evChangeRed8,evShabat8,stopEvShabat8);
+		 listTwo[5].init(evack9,evChengeGreen9,evChangeRed9,evShabat9,stopEvShabat9);
+		 listTwo[6].init(evack10,evChengeGreen10,evChangeRed10,evShabat10,stopEvShabat10);
+		 listTwo[7].init(evack11,evChengeGreen11,evChangeRed11,evShabat11,stopEvShabat11);
+		 listTwo[8].init(evack12,evChengeGreen12,evChangeRed12,evShabat12,stopEvShabat12);
+		 listTwo[9].init(evack13,evChengeGreen13,evChangeRed13,evShabat13,stopEvShabat13);
+		 listTwo[10].init(evack14,evChengeGreen14,evChangeRed14,evShabat14,stopEvShabat14);
+		 listTwo[11].init(evack15,evChengeGreen15,evChangeRed15,evShabat15,stopEvShabat15);
 		
-		listThree[0].init(evack0,evChengeGreen0,evChangeRed0,evShabat,stopEvShabat);
-		listThree[1].init(evack1,evChengeGreen1,evChangeRed1,evShabat,stopEvShabat);
-		listThree[2].init(evack2,evChengeGreen2,evChangeRed2,evShabat,stopEvShabat);
-		listThree[3].init(evack3,evChengeGreen3,evChangeRed3,evShabat,stopEvShabat);
+		listThree[0].init(evack0,evChengeGreen0,evChangeRed0,evShabat0,stopEvShabat0);
+		listThree[1].init(evack1,evChengeGreen1,evChangeRed1,evShabat1,stopEvShabat1);
+		listThree[2].init(evack2,evChengeGreen2,evChangeRed2,evShabat2,stopEvShabat2);
+		listThree[3].init(evack3,evChengeGreen3,evChangeRed3,evShabat3,stopEvShabat3);
 		start();
 	}
 	public void run()
@@ -67,8 +71,8 @@ public class Controller  extends Thread
 							}
 							if(data != null)
 							    ((JRadioButton) data).setSelected(false);
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -82,8 +86,8 @@ public class Controller  extends Thread
 							}
 							break;
 						case turn_0_red:
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -108,8 +112,8 @@ public class Controller  extends Thread
 							}
 							if(data != null)
 							    ((JRadioButton) data).setSelected(false);
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 								break;
@@ -134,8 +138,8 @@ public class Controller  extends Thread
 								data2 = stamButtonRegel.waitEvent();
 							((JRadioButton) data2).setSelected(false);
 							}
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -149,8 +153,8 @@ public class Controller  extends Thread
 							}
 							break;
 						case green1_2:
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 								break;
@@ -179,8 +183,8 @@ public class Controller  extends Thread
 								data2 = stamButtonRegel.waitEvent();
 							((JRadioButton) data2).setSelected(false);
 							}
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -193,8 +197,8 @@ public class Controller  extends Thread
 							}
 							break;
 						case from23_to_0:
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -208,8 +212,8 @@ public class Controller  extends Thread
 							}
 							break;
 						case from12_to_23:
-							if(evShabat.arrivedEvent()) {
-								evShabat.waitEvent();
+							if(evButtonShabat.arrivedEvent()) {
+								evButtonShabat.waitEvent();
 								out=true;
 								outState=OutState.Shabat;
 							}
@@ -226,15 +230,70 @@ public class Controller  extends Thread
 						}
 					}
 				case Shabat:
-					evChangeRed0.sendEvent();evChangeRed1.sendEvent();evChangeRed2.sendEvent();evChangeRed3.sendEvent();
-					evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();
-					evChangeRed8.sendEvent();evChangeRed9.sendEvent();evChangeRed10.sendEvent();evChangeRed11.sendEvent();
-					evChangeRed12.sendEvent();evChangeRed13.sendEvent();evChangeRed14.sendEvent();evChangeRed15.sendEvent();
-					evack0.waitEvent();evack1.waitEvent();evack2.waitEvent();evack3.waitEvent();
-					evack4.waitEvent();evack5.waitEvent();evack6.waitEvent();evack7.waitEvent();
-					evack8.waitEvent();evack9.waitEvent();evack10.waitEvent();evack11.waitEvent();
-                    evack12.waitEvent();evack13.waitEvent();evack14.waitEvent();evack15.waitEvent();
-					stopEvShabat.waitEvent();
+					switch(state)
+					{
+					case green0:
+						evChangeRed0.sendEvent();
+						evChangeRed6.sendEvent();evChangeRed7.sendEvent();
+						evChangeRed9.sendEvent();evChangeRed10.sendEvent();
+						evChangeRed12.sendEvent();evChangeRed13.sendEvent();
+						evack0.waitEvent();
+						evack6.waitEvent();evack7.waitEvent();
+						evack9.waitEvent();evack10.waitEvent();
+						evack12.waitEvent();evack13.waitEvent();
+						break;
+					case turn_0_red:
+						evack0.waitEvent();evack13.waitEvent();
+						evack6.waitEvent();evack7.waitEvent();
+						evack9.waitEvent();evack10.waitEvent();evack12.waitEvent();
+						break;
+					case green2_3:
+						evChangeRed2.sendEvent();evChangeRed3.sendEvent();
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();
+						evChangeRed8.sendEvent();evChangeRed11.sendEvent();
+						evChangeRed14.sendEvent();evChangeRed15.sendEvent();
+						evack2.waitEvent();evack3.waitEvent();
+						evack4.waitEvent();evack5.waitEvent();
+						evack8.waitEvent();evack11.waitEvent();
+						evack14.waitEvent();evack15.waitEvent();
+						break;
+					case turn_3_red:
+						evChangeRed2.sendEvent();
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();
+						evack2.waitEvent();
+						evack4.waitEvent();evack5.waitEvent();
+						break;
+					case green1_2:
+						evChangeRed1.sendEvent();evChangeRed2.sendEvent();
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();
+						evChangeRed12.sendEvent();evChangeRed13.sendEvent();
+						evack1.waitEvent();evack2.waitEvent();
+						evack4.waitEvent();evack5.waitEvent();evack6.waitEvent();evack7.waitEvent();
+						evack12.waitEvent();evack13.waitEvent();
+						break;
+					case turn1_2red:
+						evChangeRed6.sendEvent();evChangeRed7.sendEvent();
+						evChangeRed12.sendEvent();evChangeRed13.sendEvent();
+						evack6.waitEvent();evack7.waitEvent();
+						evack12.waitEvent();evack13.waitEvent();
+						break;
+					case from23_to_0:
+						evack4.waitEvent();evack5.waitEvent();evack14.waitEvent();evack15.waitEvent();
+					    evack11.waitEvent();evack8.waitEvent();evack2.waitEvent();evack3.waitEvent();
+					    break;
+					case from12_to_23:
+						evChangeRed2.sendEvent();
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();
+						evack13.waitEvent();evack12.waitEvent();evack7.waitEvent();
+						evack6.waitEvent();evack1.waitEvent();
+						break;
+					}
+					sleep(5000);
+					evShabat0.sendEvent();evShabat1.sendEvent();evShabat2.sendEvent();evShabat3.sendEvent();evShabat4.sendEvent();evShabat5.sendEvent();evShabat6.sendEvent();evShabat7.sendEvent();evShabat8.sendEvent();
+					evShabat9.sendEvent();evShabat10.sendEvent();evShabat11.sendEvent();evShabat12.sendEvent();evShabat13.sendEvent();evShabat14.sendEvent();evShabat15.sendEvent();
+					stopButtonEvShabat.waitEvent();
+					stopEvShabat0.sendEvent();stopEvShabat1.sendEvent();stopEvShabat2.sendEvent();stopEvShabat3.sendEvent();stopEvShabat4.sendEvent();stopEvShabat5.sendEvent();stopEvShabat6.sendEvent();stopEvShabat7.sendEvent();stopEvShabat8.sendEvent();
+					stopEvShabat9.sendEvent();stopEvShabat10.sendEvent();stopEvShabat11.sendEvent();stopEvShabat12.sendEvent();stopEvShabat13.sendEvent();stopEvShabat14.sendEvent();stopEvShabat15.sendEvent();
 					out=false;
 					outState=OutState.regularDay;
 					state = State.green0;

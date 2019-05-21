@@ -34,11 +34,11 @@ public class ShloshaAvot extends Thread
 		state=State.red;
 		outState=OutState.regularDay;
 		boolean finishR=true;
-		setLight(1,Color.RED);
-		evack.sendEvent();
+		boolean finishS=false;
 		if(evShabat.arrivedEvent()) {
 			evShabat.waitEvent();
 			outState = OutState.Shabat;
+			finishS=true;
 		}
 		try 
 		{
@@ -47,6 +47,10 @@ public class ShloshaAvot extends Thread
 					switch (outState)
 					{
 						case regularDay:
+							setLight(1,Color.RED);
+							setLight(2,Color.GRAY);
+							setLight(3,Color.GRAY);
+							evack.sendEvent();
 						while(finishR) {
 							switch(state)
 							{
@@ -56,56 +60,89 @@ public class ShloshaAvot extends Thread
 								{
 								evChengeGreen.waitEvent();
 								sleep(1000);
-								setLight(1,Color.LIGHT_GRAY);
-								setLight(2,Color.LIGHT_GRAY);
+								setLight(1,Color.GRAY);
+								setLight(2,Color.GRAY);
 								setLight(3,Color.GREEN);
 								state=State.green;
-								}
-								else if(evChengeRed.arrivedEvent())
-								{
-									evChengeRed.waitEvent();
-									evack.sendEvent();
-									state=State.red;
 								}
 								else if(evShabat.arrivedEvent())
 								{
 									evShabat.waitEvent();
 									setLight(1,Color.GRAY);
 									setLight(2,Color.GRAY);
+									setLight(3,Color.GRAY);
+									outState=outState.Shabat;
 									finishR=false;
+									finishS=true;
 								}
 								else
 									yield(); 
 								break;
 							case yellow:
 								//tm(500)/setLight(red),evack
+								if(evShabat.arrivedEvent())
+								{
+									evShabat.waitEvent();
+									setLight(1,Color.GRAY);
+									setLight(2,Color.GRAY);
+									setLight(3,Color.GRAY);
+									outState=outState.Shabat;
+									finishR=false;
+									finishS=true;
+								}
+								else {
 								sleep(500);
 								setLight(1,Color.RED);
-								setLight(2,Color.LIGHT_GRAY);
-								setLight(3,Color.LIGHT_GRAY);
+								setLight(2,Color.GRAY);
+								setLight(3,Color.GRAY);
 								evack.sendEvent();
 								state=State.red;
+								}
 								break;
 							case green:
 								//evChengeRed /setLight(yellow)
+								if(evChengeRed.arrivedEvent())
+								{
 								evChengeRed.waitEvent();
-								setLight(1,Color.LIGHT_GRAY);
+								setLight(1,Color.GRAY);
 								setLight(2,Color.YELLOW);
-								setLight(3,Color.LIGHT_GRAY);
+								setLight(3,Color.GRAY);
 								state=State.yellow;
+								}
+								else if(evShabat.arrivedEvent())
+								{
+									evShabat.waitEvent();
+									setLight(1,Color.GRAY);
+									setLight(2,Color.GRAY);
+									setLight(3,Color.GRAY);
+									outState=outState.Shabat;
+									finishR=false;
+									finishS=true;
+								}
+								else
+									yield(); 
 								break;
 							
 							}
 						}
 					case Shabat:
+						while(finishS)
+						{
+						sleep(300);
+						setLight(2,Color.GRAY);
 						sleep(300);
 						setLight(2,Color.YELLOW);
-						sleep(300);
-						setLight(2,Color.LIGHT_GRAY);
-						if(stopEvShabat.arrivedEvent())
-						outState=OutState.regularDay;
-						else
-							outState = OutState.Shabat;
+							if(stopEvShabat.arrivedEvent())
+							{
+							stopEvShabat.waitEvent();
+							outState=OutState.regularDay;
+							state=State.red;
+							finishR=true;
+							finishS=false;
+							}
+						
+						}
+						
 						break;
 				}
 
