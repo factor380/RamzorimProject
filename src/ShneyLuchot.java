@@ -43,7 +43,7 @@ class ShneyLuchot extends Thread
 						switch(state)
 						{
 						case red:
-							//evchengeGreen/setLigt(green)
+							//evChengeGreen/sleep(1000),setLight(green)
 							if(evChengeGreen.arrivedEvent())
 							{
 							evChengeGreen.waitEvent();
@@ -65,7 +65,7 @@ class ShneyLuchot extends Thread
 								
 							break;
 						case green:
-							//evchengeRed/setLight(red),evack
+							//evChengeRed/setLight(red),evack
 							if(evChengeRed.arrivedEvent())
 							{
 							evChengeRed.waitEvent();

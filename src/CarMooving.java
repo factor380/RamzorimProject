@@ -2,13 +2,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*
- * Created on Tevet 5770 
- */
-
-/**
- * @author לויאן
- */
 
 public class CarMooving extends Thread
 {

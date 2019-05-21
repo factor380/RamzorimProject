@@ -40,7 +40,7 @@ public class BuildTrafficLight
 		TrafficLightFrame tlf=new TrafficLightFrame("  installation of traffic lights",ramzorim);
 
 		for (int i = 0; i<4 ; i++) {
-			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i);
+			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i+1);
 		}
 
 		for (int i = 0; i<12 ; i++) {

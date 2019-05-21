@@ -19,7 +19,7 @@ public class ShloshaAvot extends Thread
 	{
 		this.ramzor=ramzor;
 		this.panel=panel;
-		//new CarsMaker(panel,this,key);
+		new CarsMaker(panel,this,key);
 	}
 	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed,Event64 evShabat,Event64 stopEvShabat) {
 		this.evack = evack;
@@ -63,6 +63,7 @@ public class ShloshaAvot extends Thread
 								setLight(1,Color.GRAY);
 								setLight(2,Color.GRAY);
 								setLight(3,Color.GREEN);
+								stop=false;
 								state=State.green;
 								}
 								else if(evShabat.arrivedEvent())
@@ -104,6 +105,7 @@ public class ShloshaAvot extends Thread
 								if(evChengeRed.arrivedEvent())
 								{
 								evChengeRed.waitEvent();
+								stop = true;
 								setLight(1,Color.GRAY);
 								setLight(2,Color.YELLOW);
 								setLight(3,Color.GRAY);
@@ -128,9 +130,11 @@ public class ShloshaAvot extends Thread
 					case Shabat:
 						while(finishS)
 						{
-						sleep(300);
+						//tm(500)/setLight(grey)
+						sleep(500);
 						setLight(2,Color.GRAY);
-						sleep(300);
+						//tm(500)/setLight(yellow)
+						sleep(500);
 						setLight(2,Color.YELLOW);
 							if(stopEvShabat.arrivedEvent())
 							{

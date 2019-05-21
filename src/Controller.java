@@ -2,7 +2,7 @@ import javax.swing.JRadioButton;
 
 public class Controller  extends Thread
 {
-	enum State {green0,green1_2,green2_3,turn_0_red,turn_3_red,turn1_2red,from12_to_23,from23_to_0};
+	enum State {green0,green1_2,green2_3,turn_0_red,turn_3_red,turn1_2red,from12_to_23,from23_to_0,condition1,condition2};
 	enum OutState {regularDay,Shabat};
 	State state;
 	boolean out = false;
@@ -10,7 +10,7 @@ public class Controller  extends Thread
 	ShneyLuchot listTwo[] = new ShneyLuchot[11]; 
 	OutState outState;
 	Object data,data2;
-	Event64 buttonRegel9_10 = new Event64(),buttonRegel11_8_15_14 = new Event64(),stamButtonRegel = new Event64(),evButtonShabat = new Event64(),stopButtonEvShabat = new Event64();
+	Event64 ButtonRegel = new Event64(),evButtonShabat = new Event64(),stopButtonEvShabat = new Event64();
 	Event64 evack0 = new Event64(),evack1 = new Event64(),evack2 = new Event64(),evack3 = new Event64(),evack4 = new Event64(),evack5 = new Event64(),evack6 = new Event64(),evack7 = new Event64(),evack8 = new Event64(),evack9 = new Event64()
 	,evack10 = new Event64(),evack11 = new Event64(),evack12 = new Event64(),evack13 = new Event64(),evack14 = new Event64(),evack15 = new Event64(),evChengeGreen0 = new Event64(),evChengeGreen1 = new Event64(),evChengeGreen2 = new Event64(),evChengeGreen3 = new Event64(),evChengeGreen4 = new Event64(),evChengeGreen5 = new Event64(),evChengeGreen6 = new Event64(),evChengeGreen7 = new Event64(),evChengeGreen8 = new Event64()
 	,evChengeGreen9 = new Event64(),evChengeGreen10 = new Event64(),evChengeGreen11 = new Event64(),evChengeGreen12 = new Event64(),evChengeGreen13 = new Event64(),evChengeGreen14 = new Event64(),evChengeGreen15 = new Event64(),evChangeRed0 = new Event64(),evChangeRed1 = new Event64(),evChangeRed2 = new Event64(),evChangeRed3 = new Event64(),evChangeRed4 = new Event64(),evChangeRed5 = new Event64(),evChangeRed6 = new Event64()
@@ -23,7 +23,7 @@ public class Controller  extends Thread
 		this.listThree = listThree;
 		this.listTwo = listTwo;
 		
-		myListener.init(buttonRegel9_10, buttonRegel11_8_15_14,stamButtonRegel,evButtonShabat,stopButtonEvShabat);
+		myListener.init(ButtonRegel,evButtonShabat,stopButtonEvShabat);
 		
 		 listTwo[0].init(evack4,evChengeGreen4,evChangeRed4,evShabat4,stopEvShabat4);
 		 listTwo[1].init(evack5,evChengeGreen5,evChangeRed5,evShabat5,stopEvShabat5);
@@ -66,10 +66,10 @@ public class Controller  extends Thread
 						switch(state)
 						{
 						case green0:
-							if(buttonRegel11_8_15_14.arrivedEvent()) {
-								data = buttonRegel11_8_15_14.waitEvent();
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
 							}
-							if(data != null)
+							if(data != null && (((JRadioButton)data).getName().equals("9") || ((JRadioButton)data).getName().equals("10")))
 							    ((JRadioButton) data).setSelected(false);
 							if(evButtonShabat.arrivedEvent()) {
 								evButtonShabat.waitEvent();
@@ -77,9 +77,8 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 							}
 							else {
-						//tm(7000)/evChengeRed(0,9,10,12,13,7,6);	
+						    //tm(7000)/evChengeRed(0,9,10,12,13,7,6);	
 							sleep(7000);
-							//evChengeRed(0,9,10,12,13,7,6);//how we do it
 							evChangeRed13.sendEvent();evChangeRed12.sendEvent();evChangeRed10.sendEvent();
 							evChangeRed9.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();evChangeRed0.sendEvent();
 							state=State.turn_0_red;
@@ -99,18 +98,19 @@ public class Controller  extends Thread
 							evChengeGreen4.sendEvent();evChengeGreen5.sendEvent();evChengeGreen14.sendEvent();
 							evChengeGreen15.sendEvent();evChengeGreen11.sendEvent();evChengeGreen8.sendEvent();
 							evChengeGreen2.sendEvent();evChengeGreen3.sendEvent();
-							if(stamButtonRegel.arrivedEvent()) {
-								data2 = stamButtonRegel.waitEvent();
-							((JRadioButton) data2).setSelected(false);
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
+							if(!((JRadioButton)data).getName().equals("14") || !((JRadioButton)data).getName().equals("15") || !((JRadioButton)data).getName().equals("8") || !((JRadioButton)data).getName().equals("11") || !((JRadioButton)data).getName().equals("9") || !((JRadioButton)data).getName().equals("10"))
+							((JRadioButton) data).setSelected(false);
 							}
 							state=State.green2_3;
 							}
 							break;
 						case green2_3:
-							if(buttonRegel11_8_15_14.arrivedEvent()) {
-								data = buttonRegel11_8_15_14.waitEvent();
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
 							}
-							if(data != null)
+							if(data != null && (((JRadioButton)data).getName().equals("11") || ((JRadioButton)data).getName().equals("8") ||((JRadioButton)data).getName().equals("15") ||((JRadioButton)data).getName().equals("14")))
 							    ((JRadioButton) data).setSelected(false);
 							if(evButtonShabat.arrivedEvent()) {
 								evButtonShabat.waitEvent();
@@ -118,15 +118,19 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
-							//tm(7000)[button_regel=9,10]/evChengeRed(4,5,14,15,11,8,2,3)
+							//tm(7000)
 							sleep(7000);
-							if(buttonRegel9_10.arrivedEvent()) {
-								data = buttonRegel9_10.waitEvent();
+							state = State.condition1;	
+			 				break;
+							//[button_regel=9,10]/evChengeRed(4,5,14,15,11,8,2,3)
+						case condition1:
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
 								evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed14.sendEvent();evChangeRed15.sendEvent();
 								evChangeRed11.sendEvent();evChangeRed8.sendEvent();evChangeRed2.sendEvent();evChangeRed3.sendEvent();
 								state = State.from23_to_0;
 							}
-							//tm(7000)[else]/evChengeRed(3,11,8,14,15)
+							//[else]/evChengeRed(3,11,8,14,15)
 							else {
 							evChangeRed3.sendEvent();evChangeRed11.sendEvent();evChangeRed8.sendEvent();
 							evChangeRed14.sendEvent();evChangeRed15.sendEvent();
@@ -134,10 +138,11 @@ public class Controller  extends Thread
 							}
 							break;
 						case turn_3_red:
-							if(stamButtonRegel.arrivedEvent()) {
-								data2 = stamButtonRegel.waitEvent();
-							((JRadioButton) data2).setSelected(false);
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
 							}
+							if(data != null && (((JRadioButton)data).getName().equals("11") || ((JRadioButton)data).getName().equals("8") ||((JRadioButton)data).getName().equals("15") ||((JRadioButton)data).getName().equals("14")))
+							    ((JRadioButton) data).setSelected(false);
 							if(evButtonShabat.arrivedEvent()) {
 								evButtonShabat.waitEvent();
 								out=true;
@@ -159,15 +164,19 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
+							//tm(7000)
 							sleep(7000);
-							//tm(7000)[button_regel=11,8,15,14]/evChengeRed(13,12,7,6,1)
-							if(buttonRegel11_8_15_14.arrivedEvent()) {
-								data = buttonRegel11_8_15_14.waitEvent();
+							state = State.condition2;
+							break;
+						case condition2:
+							//[button_regel=11,8,15,14]/evChengeRed(13,12,7,6,1)
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
 								evChangeRed13.sendEvent();evChangeRed12.sendEvent();
 								evChangeRed7.sendEvent();evChangeRed6.sendEvent();evChangeRed1.sendEvent();
 								state = State.from12_to_23;
 							}
-							//tm(7000)[else]/evChengeRed(4,5,1,2)
+							//[else]/evChengeRed(4,5,1,2)
 							else {
 							evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed1.sendEvent();
 							evChangeRed2.sendEvent();
@@ -175,13 +184,10 @@ public class Controller  extends Thread
 							}
 							break;
 						case turn1_2red:
-							if(buttonRegel9_10.arrivedEvent()) {
-								data = buttonRegel9_10.waitEvent();
+							if(ButtonRegel.arrivedEvent()) {
+								data = ButtonRegel.waitEvent();
+								if(!((JRadioButton)data).getName().equals("14") || !((JRadioButton)data).getName().equals("15") || !((JRadioButton)data).getName().equals("8") || !((JRadioButton)data).getName().equals("11"))
 								((JRadioButton) data).setSelected(false);
-							}
-							if(stamButtonRegel.arrivedEvent()) {
-								data2 = stamButtonRegel.waitEvent();
-							((JRadioButton) data2).setSelected(false);
 							}
 							if(evButtonShabat.arrivedEvent()) {
 								evButtonShabat.waitEvent();
@@ -230,6 +236,7 @@ public class Controller  extends Thread
 						}
 					}
 				case Shabat:
+					//evChengeRed(0-15)
 					switch(state)
 					{
 					case green0:
@@ -288,10 +295,12 @@ public class Controller  extends Thread
 						evack6.waitEvent();evack1.waitEvent();
 						break;
 					}
+					//evack(0-15)/sleep(5000),evShabat
 					sleep(5000);
 					evShabat0.sendEvent();evShabat1.sendEvent();evShabat2.sendEvent();evShabat3.sendEvent();evShabat4.sendEvent();evShabat5.sendEvent();evShabat6.sendEvent();evShabat7.sendEvent();evShabat8.sendEvent();
 					evShabat9.sendEvent();evShabat10.sendEvent();evShabat11.sendEvent();evShabat12.sendEvent();evShabat13.sendEvent();evShabat14.sendEvent();evShabat15.sendEvent();
 					stopButtonEvShabat.waitEvent();
+					//stopEvShabat
 					stopEvShabat0.sendEvent();stopEvShabat1.sendEvent();stopEvShabat2.sendEvent();stopEvShabat3.sendEvent();stopEvShabat4.sendEvent();stopEvShabat5.sendEvent();stopEvShabat6.sendEvent();stopEvShabat7.sendEvent();stopEvShabat8.sendEvent();
 					stopEvShabat9.sendEvent();stopEvShabat10.sendEvent();stopEvShabat11.sendEvent();stopEvShabat12.sendEvent();stopEvShabat13.sendEvent();stopEvShabat14.sendEvent();stopEvShabat15.sendEvent();
 					out=false;

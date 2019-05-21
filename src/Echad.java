@@ -2,13 +2,6 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-/*
- * Created on Mimuna 5767  upDate on Tevet 5770 
- */
-
-/**
- * @author לויאן
- */
 class Echad extends Thread
 {
 	Ramzor ramzor;
@@ -26,8 +19,10 @@ class Echad extends Thread
 		{
 			while (true)
 			{
+				//tm(300)/setLight(grey)
 				sleep(300);
 				setLight(1,Color.GRAY);
+				//tm(300)/setLight(yellow)
 				sleep(300);
 				setLight(1,Color.YELLOW);
 			}
