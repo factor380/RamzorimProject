@@ -172,9 +172,11 @@ public class Controller  extends Thread
 							//[button_regel=11,8,15,14]/evChengeRed(13,12,7,6,1)
 							if(ButtonRegel.arrivedEvent()) {
 								data = ButtonRegel.waitEvent();
+								if(((JRadioButton)data).getName().equals("11") || ((JRadioButton)data).getName().equals("15") || ((JRadioButton)data).getName().equals("8") || ((JRadioButton)data).getName().equals("14")) {
 								evChangeRed13.sendEvent();evChangeRed12.sendEvent();
 								evChangeRed7.sendEvent();evChangeRed6.sendEvent();evChangeRed1.sendEvent();
 								state = State.from12_to_23;
+								}
 							}
 							//[else]/evChengeRed(4,5,1,2)
 							else {
