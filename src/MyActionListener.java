@@ -10,6 +10,7 @@ public class MyActionListener implements ActionListener
 {
 	boolean shabat;
 	Event64 ButtonRegel,evShabat,stopEvShabat;
+	static boolean flag=false; 
 	public void init(Event64 ButtonRegel,Event64 evShabat,Event64 stopEvShabat) {
 		this.ButtonRegel = ButtonRegel;
 		this.evShabat = evShabat;
@@ -19,6 +20,12 @@ public class MyActionListener implements ActionListener
 	{
 		JRadioButton butt=(JRadioButton)e.getSource();
 		System.out.println(butt.getName());
+		if(flag&&!butt.getName().equals("16"))
+		{
+			butt.setSelected(false);
+			return;
+		}
+			
 		if(shabat && !(butt.getName().equals("16"))) {
 			butt.setSelected(false);
 		}
@@ -35,6 +42,7 @@ public class MyActionListener implements ActionListener
 		}
 		else {
 			ButtonRegel.sendEvent(butt);
+			flag=true;
 		}
 	}
 

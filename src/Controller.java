@@ -66,6 +66,7 @@ public class Controller  extends Thread
 						switch(state)
 						{
 						case green0:
+							MyActionListener.flag=false;
 							if(ButtonRegel.arrivedEvent()) {
 								data = ButtonRegel.waitEvent();
 							}
@@ -107,6 +108,7 @@ public class Controller  extends Thread
 							}
 							break;
 						case green2_3:
+							MyActionListener.flag=false;
 							if(ButtonRegel.arrivedEvent()) {
 								data = ButtonRegel.waitEvent();
 							}
@@ -158,6 +160,7 @@ public class Controller  extends Thread
 							}
 							break;
 						case green1_2:
+							MyActionListener.flag=false;
 							if(evButtonShabat.arrivedEvent()) {
 								evButtonShabat.waitEvent();
 								out=true;
